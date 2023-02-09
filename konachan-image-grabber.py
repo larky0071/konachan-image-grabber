@@ -65,11 +65,14 @@ def __main__():
         create_config_file()
     while post_id <= last_post_id:
         url = 'https://konachan.net/post.json?tags=id:' + str(post_id)
-        set_endpoint(post_id)
         clear_console()
         print('- requesting ' + url)
         response = requests.get(url)
-        print('- request completed')
+        if response:
+            print('- request completed')
+        else:
+            print('- request failed')
+            continue
         data = json.loads(response.text)
         print('- current post https://konachan.net/post/show/' + str(post_id))
         if len(data) == 0:
@@ -84,6 +87,7 @@ def __main__():
                 save_image_to_file(post['id'], post['file_url'])
             print('- storing info')
             save_image_info_to_file(post['id'], post)
+        set_endpoint(post_id)
         post_id = post_id + 1
 
 __main__()

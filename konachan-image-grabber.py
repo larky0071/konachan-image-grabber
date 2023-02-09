@@ -22,14 +22,14 @@ def save_image_to_file(id, url):
 
 def save_image_info_to_file(id, data):
     with open('./json/' + str(id) + '.json', 'w') as f:
-        json.dump(data, f, ensure_ascii = False, indent = 4)
+        json.dump(data, f, ensure_ascii = True, indent = 4)
 
 def check_config_exists():
     return os.path.isfile('./data/data.json')
 
 def create_config_file():
     with open('./data/data.json', 'w') as f:
-        json.dump({'endpoint': 1, 'missing': []}, f, ensure_ascii = False, indent = 4)
+        json.dump({'endpoint': 1, 'missing': []}, f, ensure_ascii = True, indent = 4)
 
 def read_config_file():
     with open('./data/data.json', 'r') as f:
@@ -37,7 +37,7 @@ def read_config_file():
 
 def save_config_file(data):
     with open('./data/data.json', 'w') as f:
-        json.dump(data, f, ensure_ascii = False, indent = 4)
+        json.dump(data, f, ensure_ascii = True, indent = 4)
 
 def set_endpoint(post_id):
     config = read_config_file()

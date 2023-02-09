@@ -77,8 +77,11 @@ def __main__():
             add_missing(post_id)
         else:
             post = data[0]
-            print('- downloading image')
-            save_image_to_file(post['id'], post['file_url'])
+            if post['status'] == 'deleted':
+                print('- post deleted')
+            else:
+                print('- downloading image')
+                save_image_to_file(post['id'], post['file_url'])
             print('- storing info')
             save_image_info_to_file(post['id'], post)
         post_id = post_id + 1
